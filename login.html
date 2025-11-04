@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es" >
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
+</head>
+
+<body>
+  
+  <!-- Contenedor externo para centrar el login -->
+  <main class="login-outer">
+    <div class="contenedor-logo">
+      <img src="img/logo sin fondo.png" alt="Logo Jap" class="logo-login">
+    </div>
+    <div class="login-box">
+      <!-- Título principal -->
+      <div class="login-title">Inicio de sesión</div>
+      <!-- Mensaje de error (oculto por defecto) -->
+      <div id="loginError" class="login-error">Debe completar ambos campos.</div>
+      <!-- Formulario de login -->
+      <form id="loginForm" autocomplete="on">
+        <input type="email" id="usuario" class="login-input" placeholder="Correo electrónico" autocomplete="username" required>
+        <input type="password" id="contrasena" class="login-input" placeholder="Contraseña" autocomplete="current-password" required>
+        <a href="#" class="login-link">¿Olvidaste tu contraseña?</a>
+        <button type="submit" class="login-btn">Iniciar sesión</button>
+      </form>
+      <!-- Enlace para registrarse -->
+      <div class="login-register">Registrarse</div>
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    </div>
+  </footer>
+  <script src="js/login.js"></script>
+</body>
+
+</html>
