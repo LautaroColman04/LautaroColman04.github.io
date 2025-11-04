@@ -24,15 +24,27 @@
         <a class="nav-link dropdown-toggle" href="#" id="userDropdownMobile" role="button" data-bs-toggle="dropdown"
           aria-expanded="false">
           <span class="colorUserMobile" id="userNameMobile"></span>
+          <img id="navbarProfileImgMobile" class="navbar-profile-img d-inline-block align-middle" src="img/img_perfil.png" alt="Perfil" style="display:none;">
         </a>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
           <li><button class="dropdown-item" id="logoutBtnMobile">Cerrar sesión</button></li>
+          <li style="position: relative;">
+              <span class="badgeCartMobile" id="cartItemCountMobile"></span>
+              <a class="dropdown-item" href="cart.html">
+                🛒 Ir al carrito
+              </a>
+            </li>
         </ul>
       </li>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav w-100 justify-content-between">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
+            <button class="btn theme-toggle-btn" onclick="toggleTheme()">
+              <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="categories.html">Categorías</a>
@@ -40,13 +52,25 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="my-profile.html">Perfil</a>
+          </li>
+          
+          
           <li class="nav-item dropdown" id="userDropdownContainer" style="display:none;">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
               <span id="userName"></span>
+              <img id="navbarProfileImg" class="navbar-profile-img d-inline-block align-middle" src="img/img_perfil.png" alt="Perfil" style="display:none;">
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li><button class="dropdown-item" id="logoutBtn">Cerrar sesión</button></li>
+              <li style="position: relative;">
+                <span class="badgeCart" id="cartItemCount"></span>
+                <a class="dropdown-item" href="cart.html" style="position: relative;">
+                  🛒 Ir al carrito
+                </a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -60,50 +84,57 @@
       <p class="lead">Verás aquí todos los productos disponibles.</p>
     </div>
 
+    <!-- Barra de búsqueda añadida aquí -->
+    <div class="search-container">
+      <input type="search" id="searchInput">
+      <button class="clear-search" id="clearSearch">×</button>
+      <button class="search-btn" id="searchButton">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+
     <!-- Orden filtrado -->
     <div class="row mb-4 ">
       <div class="d-flex justify-content-start justify-content-md-center mb-4 ms-2 ms-md-0">
         <div class="btn-group" role="group">
           <input type="radio" class="btn-check" name="options" id="sortAsc">
-          <label class="btn btn-outline-secondary d-none d-md-block " for="sortAsc">Menor precio</label>
-          <label class="btn btn-outline-secondary d-md-none d-block redondearBtnIzquierda" for="sortAsc">&lt; Precio</label>
+          <label class="btn btnCustom btn-outline-secondary d-none d-md-block " for="sortAsc">Menor precio</label>
+          <label class="btn btnCustom btn-outline-secondary d-md-none d-block redondearBtnIzquierda" for="sortAsc">&lt; Precio</label>
 
           <input type="radio" class="btn-check" name="options" id="sortDesc">
-          <label class="btn btn-outline-secondary  d-none d-md-block" for="sortDesc">Mayor precio</label>
-          <label class="btn btn-outline-secondary d-md-none d-block" for="sortDesc">&gt; Precio</label>
+          <label class="btn btnCustom btn-outline-secondary  d-none d-md-block" for="sortDesc">Mayor precio</label>
+          <label class="btn btnCustom btn-outline-secondary d-md-none d-block" for="sortDesc">&gt; Precio</label>
 
           <input type="radio" class="btn-check" name="options" id="sortByCount" checked>
-          <label class="btn btn-outline-secondary d-none d-md-block redondearBtnDerecha" for="sortByCount">Más vendidos</label>
-          <label class="btn btn-outline-secondary d-md-none d-block" for="sortByCount">+ Vendidos</label>
+          <label class="btn btnCustom btn-outline-secondary d-none d-md-block redondearBtnDerecha" for="sortByCount">Más vendidos</label>
+          <label class="btn btnCustom btn-outline-secondary d-md-none d-block" for="sortByCount">+ Vendidos</label>
         </div>
       </div>
     </div>
 
     <!-- Filtro precios -->
-<div class="d-flex justify-content-start justify-content-md-center mb-4 ms-2 ms-md-0" id="barraprecio">
-  <div class="row align-items-center g-2 w-50">
-    <div class="col-12 col-md-2">
-      <h6 class="mb-0 text-md-end fw-bold">Precio</h6>
-    </div>
-    <div class="col-6  col-md-2">
-      <input class="form-control" type="number" placeholder="mín." id="rangeFilterPriceMin">
-    </div>
-    <div class="col-6 col-md-2">
-      <input class="form-control" type="number" placeholder="máx." id="rangeFilterPriceMax">
-    </div>
-    <div class="col-12 col-md-3 d-flex gap-2">
-      <button class="btn btn-primary w-100" id="rangeFilterPrice">Filtrar</button>
-      <button class="btn btn-outline-secondary w-100" id="clearRangeFilter">Limpiar</button>
-    </div>
-  </div>
-</div>
-
-      <div class="container box-transparente py-4">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="prod-list-container">
-
+    <div class="d-flex justify-content-start justify-content-md-center mb-4 ms-2 ms-md-0" id="barraprecio">
+      <div class="row align-items-center g-2 w-50">
+        <div class="col-12 col-md-2">
+          <h6 class="mb-0 text-md-end fw-bold">Precio</h6>
+        </div>
+        <div class="col-6  col-md-2">
+          <input class="form-control form-controlCustom" type="number" placeholder="mín." id="rangeFilterPriceMin">
+        </div>
+        <div class="col-6 col-md-2">
+          <input class="form-control form-controlCustom" type="number" placeholder="máx." id="rangeFilterPriceMax">
+        </div>
+        <div class="col-12 col-md-3 d-flex gap-2">
+          <button class="btn btnCustom btn-primary w-100" id="rangeFilterPrice">Filtrar</button>
+          <button class="btn btnCustom btn-outline-secondary w-100" id="clearRangeFilter">Limpiar</button>
         </div>
       </div>
     </div>
+
+    <div class="container box-transparente py-4">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4" id="prod-list-container">
+
+      </div>
   </main>
 
   <footer class="text-muted">
